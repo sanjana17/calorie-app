@@ -2,7 +2,9 @@ import React, { Component } from "react";
 
 class CalorieNeeds extends Component {
   render() {
-    return <div />;
+      return (
+            <h1>hello</h1>
+      );
   }
 }
 
