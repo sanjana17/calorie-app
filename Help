@@ -7,4 +7,12 @@ $ new-component [component name- camel case]
 Refer : https://www.npmjs.com/package/new-component
 
 
+Create new APP
+
+npx create-react-app my-app
+cd my-app
+npm start
+
+
+
 
