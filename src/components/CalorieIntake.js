@@ -1,5 +1,8 @@
 import React, { Component } from "react";
-import './CalorieIntake.css'
+import './CalorieIntake.css';
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+
 
 class CalorieIntake extends Component {
     render() {
@@ -10,28 +13,15 @@ class CalorieIntake extends Component {
                     <div className="col-2"></div>
                     <form className="col-8">
                         <div className="row">
-                        <div class="group" className="col-3">
-                            <input type="Item" required/>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Food Item</label>
+                            <TextField hintText="Item" className="col-3"/>
+                            <div className="col-1"></div>
+                            <TextField hintText="Quantity" className="col-3"/>
+                            <div className="col-1"></div>
+                            <TextField hintText="units" className="col-3"/>
                         </div>
-                        &nbsp;&nbsp;
-                        <div class="group" className="col-3">
-                            <input type="quantity" required/>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>Quantity</label>
+                        <div className="row">
+                            <RaisedButton label="Default" />
                         </div>
-                        <span className="col-1"></span>
-                        <div class="group" className="col-3">
-                            <input type="units" required/>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label>units</label>
-                        </div>
-                        </div>
-                        <button type="button" class="btn btn-primary">Primary</button>
                     </form>
                     <div className="col-2"></div>
                     </div>
