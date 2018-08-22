@@ -3,6 +3,9 @@ import './CalorieIntake.css';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 
+const style = {
+    margin: 12,
+};
 
 class CalorieIntake extends Component {
     render() {
@@ -20,7 +23,8 @@ class CalorieIntake extends Component {
                             <TextField hintText="units" className="col-3"/>
                         </div>
                         <div className="row">
-                            <RaisedButton label="Default" />
+                            <RaisedButton label="Primary" primary={true} style={style} />
+                            <RaisedButton label="Secondary" secondary={true} style={style} />
                         </div>
                     </form>
                     <div className="col-2"></div>
