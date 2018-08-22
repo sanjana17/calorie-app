@@ -11,9 +11,9 @@ class App extends Component {
         <header className="App-header">
             <CalorieIntake/>
         </header>
-        <p className="App-intro">
+        <div className="App-intro">
             <CalorieNeeds/>
-        </p>
+        </div>
       </div>
     );
   }
