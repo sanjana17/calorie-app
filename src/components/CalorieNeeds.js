@@ -64,28 +64,37 @@ class CalorieNeeds extends Component {
       return (
           <div className="jumbotron">
               <h1>Know Your Calorie Needs</h1>
-              <form onSubmit={this.handleSubmit}>
-                    <label>Gender: </label>
-                    <label>Male</label><input type={'radio'} name={'gender'} value={'male'} onChange={this.handleChange} checked={this.state.gender==='male'}/>
-                    <label>Female</label><input type={'radio'} name={'gender'} value={'female'} onChange={this.handleChange} checked={this.state.gender==='female'}/>
-
-                  <table align={'center'}>
-                      <tbody>
-                      <tr><td>Age:</td><td> <input type={'number'} value={this.state.age} name={'age'} onChange={this.handleChange} placeholder={'age'} required/> </td><td>Years</td></tr>
-                      <tr><td>Weight:</td><td> <input type={'number'} value={this.state.weight} name={'weight'} onChange={this.handleChange} placeholder={this.state.weightUnit==='kg'?'kg':'lb'} required/> </td>
-                          <td>Kgs<input type={'radio'} name={'weightUnit'} value={'kg'} onChange={this.handleChange} checked={this.state.weightUnit==='kg'} ></input></td>
-                          <td>Lbs<input type={'radio'} name={'weightUnit'} value={'lb'} onChange={this.handleChange} checked={this.state.weightUnit==='lb'} ></input></td>
-                      </tr>
-                      <tr><td>Height:</td><td> <input type={'number'} value={this.state.height} name='height' onChange={this.handleChange} placeholder={this.state.heightUnit==='ft'?'feet':'cm'} required/>  <input type={'number'} value={this.state.inches} name={'inches'} className={this.state.heightUnit==='ft'?'d-block':'d-none'} onChange={this.handleChange}  placeholder={'inches'} required/></td>
-                          <td>cms<input type={'radio'} value={'cm'} checked={this.state.heightUnit==='cm'} onChange={this.handleChange} name='heightUnit'></input></td>
-                          <td>Feet & inches<input type={'radio'} value={'ft'} checked={this.state.heightUnit==='ft'} onChange={this.handleChange} name='heightUnit'></input></td>
-                      </tr>
-                      </tbody>
-                  </table>
-                    <input type={'submit'} className={'btn btn-primary'}  value={'Submit'} />
-                    <input type={'button'} className={'btn btn-primary'}  value={'Clear'} onClick={this.clearAll}/>
-              </form>
-              <div className={this.state.hide}>Calorie Needs :{this.state.calories}</div>
+              <div className={'row'}>
+                  <div className={'col-md-4'}></div>
+                  <div className={'col-md-4'}>
+                      <form onSubmit={this.handleSubmit}>
+                          <div class="form-group ">
+                              <label>Gender: </label>
+                              <label>Male</label><input type={'radio'} name={'gender'} value={'male'} onChange={this.handleChange} checked={this.state.gender==='male'}/>
+                              <label>Female</label><input type={'radio'} name={'gender'} value={'female'} onChange={this.handleChange} checked={this.state.gender==='female'}/>
+                          </div>
+                          <div class="form-group row">
+                            <label>Age:</label><input type={'number'} value={this.state.age} name={'age'} onChange={this.handleChange} placeholder={'age'} required/> Years
+                          </div>
+                          <div class="form-group row">
+                              <label>Weight: </label><input type={'number'} value={this.state.weight} name={'weight'} onChange={this.handleChange} placeholder={this.state.weightUnit==='kg'?'kg':'lb'} required/>
+                              <input type={'radio'} name={'weightUnit'} value={'kg'} onChange={this.handleChange} checked={this.state.weightUnit==='kg'} />Kilos
+                              <input type={'radio'} name={'weightUnit'} value={'lb'} onChange={this.handleChange} checked={this.state.weightUnit==='lb'} />Pounds
+                          </div>
+                          <div class="form-group row">
+                              <label>Height:</label> <input type={'number'} value={this.state.height} name='height' onChange={this.handleChange} placeholder={this.state.heightUnit==='ft'?'feet':'cm'} required/>  <input type={'number'} value={this.state.inches} name={'inches'} className={this.state.heightUnit==='ft'?'d-block':'d-none'} onChange={this.handleChange}  placeholder={'inches'} required/>
+                              <input type={'radio'} value={'cm'} checked={this.state.heightUnit==='cm'} onChange={this.handleChange} name='heightUnit'/>CMs
+                              <input type={'radio'} value={'ft'} checked={this.state.heightUnit==='ft'} onChange={this.handleChange} name='heightUnit'/>Feet & Inches
+                          </div>
+                          <div class="form-group">
+                              <input type={'submit'} className={'btn btn-primary'}  value={'Submit'} />
+                              <input type={'button'} className={'btn btn-primary'}  value={'Clear'} onClick={this.clearAll}/>
+                          </div>
+                      </form>
+                        <div className={this.state.hide}>Calorie Needs :{this.state.calories}</div>
+                  </div>
+                  <div className={'col-md-4'}></div>
+              </div>
           </div>
       );
   }
