@@ -1,5 +1,5 @@
 
-Create new Component
+########Create new Component#######
 
 $ npm i -g new-component
 $ new-component [component name- camel case]
@@ -7,13 +7,19 @@ $ new-component [component name- camel case]
 Refer : https://www.npmjs.com/package/new-component
 
 
-Create new APP
+#########Create new APP#########
 
-npx create-react-app my-app
+npx create-react-app calorie-app
 cd my-app
 npm start
 
 file structure example
 https://reactjs.org/docs/faq-structure.html
+
+
+########### Formula to calculate calories###############
+The Mifflin St Jeor Equation
+Men BMR = (10 x weight in kg) + (6.25 x height in cm) - (5 x age in years) + 5 (measured in Kcal/day)
+Women BMR = (10 x weight in kg) + (6.25 x height in cm) - (5 x age in years) - 161 (measured in Kcal/day)
 
 
