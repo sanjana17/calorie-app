@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import CalorieNeeds from './components/CalorieNeeds';
 import CalorieIntake from "./components/CalorieIntake";
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
-import FontIcon from 'material-ui/FontIcon';
 import AppBar from 'material-ui/AppBar';
 
 class App extends Component {
