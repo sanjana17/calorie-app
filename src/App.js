@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import CalorieNeeds from './components/CalorieNeeds';
 import CalorieIntake from "./components/CalorieIntake";
 import Drawer from 'material-ui/Drawer';
@@ -18,15 +19,13 @@ class App extends Component {
       <div className="App">
           <AppBar title="Daily Calorie Report" onLeftIconButtonClick={this.handleToggle} iconElementLeft={<i className="material-icons">menu</i>}/>
           <Drawer open={this.state.open} >
-              <MenuItem>Menu Item</MenuItem>
-              <MenuItem>Menu Item 2</MenuItem>
+              <MenuItem href="/calorieNeeds">Calorie Needs</MenuItem>
+              <MenuItem href="/calorieIntake">Calorie Calculator</MenuItem>
           </Drawer>
-        <header className="App-header">
-            <CalorieIntake/>
-        </header>
-        <div className="App-intro">
-            <CalorieNeeds/>
-        </div>
+          <Router>
+              <Route exact path="/calorieIntake" component={ CalorieIntake } />
+              <Route exact path="/calorieNeeds" component={ CalorieNeeds } />
+          </Router>
       </div>
     );
   }
