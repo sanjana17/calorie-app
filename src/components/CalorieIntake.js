@@ -42,7 +42,8 @@ class CalorieIntake extends Component {
 			dailyIntake: [],
 			foodItems: [],
 			quantity: '',
-			unit: ''
+			unit: '',
+			totalCalories:0,
 		}
 	}
 	
@@ -81,7 +82,7 @@ class CalorieIntake extends Component {
 	
 	handleAdd = (event) => {
 		let url = "https://api.nutritionix.com/v1_1/search/" + this.state.item + "?results=0:10&fields=item_name,brand_name,item_id,nf_calories&appId=b8c699e1&appKey=b0a1785f6d0c3cf84923d5795cda3160";
-		fetch(url).then(res => res.json()).then(data => this.setState({itemCalories: data.hits[0].fields.nf_calories}, () => this.addValuesDailyIntake()));
+		fetch(url).then(res => res.json()).then(data => this.setState({itemCalories: data.hits[0].fields.nf_calories, totalCalories: this.state.totalCalories+data.hits[0].fields.nf_calories}, () => this.addValuesDailyIntake()));
 		
 	}
 	
@@ -130,7 +131,7 @@ class CalorieIntake extends Component {
 					<div className="col-2"></div>
 					<div className="col-8">
 						{this.state.dailyIntake.length > 0 &&
-						<ResultTable dailyIntake={this.state.dailyIntake} quantity={this.state.quantity} unit={this.state.unit}/>
+						<ResultTable dailyIntake={this.state.dailyIntake} quantity={this.state.quantity} unit={this.state.unit} sum ={this.state.totalCalories}/>
 						}
 					</div>
 					<div className="col-2"></div>

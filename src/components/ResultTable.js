@@ -6,6 +6,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
 class ResultTable extends React.Component {
+
 	render() {
 		return (
 			<Table>
@@ -28,6 +29,12 @@ class ResultTable extends React.Component {
 							<TableCell align="right">{row.itemCalories}</TableCell>
 						</TableRow>
 					))}
+					<TableRow>
+						<TableCell><b>Total</b></TableCell>
+						<TableCell>  </TableCell>
+						<TableCell>   </TableCell>
+						<TableCell><b>{this.props.sum}</b></TableCell>
+					</TableRow>
 				</TableBody>
 			</Table>
 		)
