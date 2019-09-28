@@ -20,7 +20,7 @@ class App extends Component {
           <AppBar title="Daily Calorie Report" onLeftIconButtonClick={this.handleToggle} iconElementLeft={<i className="material-icons">menu</i>}/>
           <Drawer open={this.state.open} >
               <MenuItem href="/calorieNeeds">Calorie Needs</MenuItem>
-              <MenuItem href="/calorieIntake">Calorie Calculator</MenuItem>
+              <MenuItem href="/calorieIntake">Calorie Log</MenuItem>
           </Drawer>
           <Router>
               <Route exact path="/calorieIntake" component={ CalorieIntake } />
