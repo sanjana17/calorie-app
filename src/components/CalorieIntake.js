@@ -5,7 +5,7 @@ import TextField from 'material-ui/TextField';
 import Autosuggest from 'react-autosuggest';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
-import ResultTable from './ResultTable'
+import ResultTable from './ResultTable';
 
 
 const style = {
@@ -74,7 +74,7 @@ class CalorieIntake extends Component {
 		});
 	};
 	addValuesDailyIntake = () => {
-		var itemObject = {item: this.state.item, itemCalories: this.state.itemCalories}
+		var itemObject = {item: this.state.item, itemCalories: this.state.itemCalories, quantity: this.state.quantity, unit: this.state.unit}
 		var dailyIntake = this.state.dailyIntake;
 		dailyIntake.push(itemObject);
 		this.setState({dailyIntake: dailyIntake})

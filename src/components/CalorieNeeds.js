@@ -1,4 +1,10 @@
 import React, { Component } from "react";
+import TextField from 'material-ui/TextField';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControl from '@material-ui/core/FormControl';
 
 class CalorieNeeds extends Component {
     constructor(props) {
@@ -62,40 +68,43 @@ class CalorieNeeds extends Component {
 
   render() {
       return (
-          <div className="jumbotron">
-              <h1>Know Your Calorie Needs</h1>
-              <div className={'row'}>
-                  <div className={'col-md-4'}></div>
-                  <div className={'col-md-4'}>
+          <div className="row">
+            <div class="col s12 m5">
+            <div class="card-panel teal">
+            <h1>Know Your Calorie Needs</h1>
+                  <div className='col-md-4'></div>
+                  <div className='col-md-4'>
                       <form onSubmit={(event) => this.handleSubmit(event)}>
-                          <div className="form-group ">
-                              <label>Gender: </label>
-                              <label>Male</label><input type={'radio'} name={'gender'} value={'male'} onChange={this.handleChange} checked={this.state.gender==='male'}/>
-                              <label>Female</label><input type={'radio'} name={'gender'} value={'female'} onChange={this.handleChange} checked={this.state.gender==='female'}/>
-                          </div>
-                          <div className="form-group row">
-                            <label>Age:</label><input type={'number'} value={this.state.age} name={'age'} onChange={this.handleChange} placeholder={'age'} required/> Years
-                          </div>
-                          <div className="form-group row">
-                              <label>Weight: </label><input type={'number'} value={this.state.weight} name={'weight'} onChange={(event) => this.handleChange(event)} placeholder={this.state.weightUnit==='kg'?'kg':'lb'} required/>
-                              <input type={'radio'} name={'weightUnit'} value={'kg'} onChange={this.handleChange} checked={this.state.weightUnit==='kg'} />Kilos
-                              <input type={'radio'} name={'weightUnit'} value={'lb'} onChange={this.handleChange} checked={this.state.weightUnit==='lb'} />Pounds
-                          </div>
-                          <div className="form-group row">
-                              <label>Height:</label> <input type={'number'} value={this.state.height} name='height' onChange={this.handleChange} placeholder={this.state.heightUnit==='ft'?'feet':'cm'} required/>
-                              {this.state.heightUnit==='ft' && <input type={'number'} value={this.state.inches} className={this.state.heightUnit==='ft'?'d-block':'d-none'} onChange={this.handleChange}  placeholder={'inches'} required/>}
-                              <input type={'radio'} value={'cm'} checked={this.state.heightUnit==='cm'} onChange={this.handleChange} name='heightUnit'/>CMs
-                              <input type={'radio'} value={'ft'} checked={this.state.heightUnit==='ft'} onChange={this.handleChange} name='heightUnit'/>Feet & Inches
-                          </div>
+                          <FormControl component="fieldset" className='radio'>
+                            <FormLabel component="legend">Gender</FormLabel>
+                            <RadioGroup aria-label="gender" name="gender" value={this.state.gender} onChange={this.handleChange}>
+                            <FormControlLabel value="female" control={<Radio />} label="Female" />
+                            <FormControlLabel value="male" control={<Radio />} label="Male" />
+                            </RadioGroup>
+                            </FormControl>
+                            <TextField hintText="Age" value={this.state.age} name='age' onChange={this.handleChange} required/>
+                            <TextField hintText="Weight" value={this.state.weight} name='weight' onChange={this.handleChange} required/>
+                            <FormLabel component="legend">Unit</FormLabel>
+                            <RadioGroup aria-label="unit" name="weightUnit" value={this.state.weightUnit} onChange={this.handleChange}>
+                            <FormControlLabel value="lb" control={<Radio />} label="LB" />
+                            <FormControlLabel value="kg" control={<Radio />} label="KG" />
+                            </RadioGroup>
+                            <TextField hintText="Height" value={this.state.height} name='height' onChange={this.handleChange} required/>
+                            <FormLabel component="legend">height unit</FormLabel>
+                            <RadioGroup aria-label="heightunit" name="heightUnit" value={this.state.heightUnit} onChange={this.handleChange} className='radio'>
+                            <FormControlLabel value="cm" control={<Radio />} label="CM" />
+                            <FormControlLabel value="ft" control={<Radio />} label="FT" />
+                            </RadioGroup>
                           <div className="form-group">
-                              <input type={'submit'} className={'btn btn-primary'}  value={'Submit'} />
-                              <input type={'button'} className={'btn btn-primary'}  value={'Clear'} onClick={this.clearAll}/>
+                              <input type='submit' className='btn btn-primary'  value='Submit' />
+                              <input type='button' className='btn btn-primary'  value='Clear' onClick={this.clearAll}/>
                           </div>
                       </form>
                         <div className={this.state.hide}>Calorie Needs :{this.state.calories}</div>
                   </div>
-                  <div className={'col-md-4'}></div>
-              </div>
+                  <div className='col-md-4'></div>
+                  </div>
+                  </div>
           </div>
       );
   }
