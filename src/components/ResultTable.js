@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React from "react";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -10,8 +10,15 @@ class ResultTable extends React.Component {
 	constructor(props){
 		super(props);
 		this.state={
-			dailyIntake: this.props.dailyIntake,
-			sum: this.handleSum,
+			dailyIntake: [],
+			sum: 0,
+		}
+	}
+
+	static getDerivedStateFromProps(props, state) {
+		return {
+			...state,
+			dailyIntake: props.dailyIntake,
 		}
 	}
 
@@ -20,10 +27,12 @@ class ResultTable extends React.Component {
 		this.setState({ dailyIntake: items });
 	}
 
-	handleSum = () => {
-		const totalCalories = 0;
-		this.state.dailyIntake.map(item => totalCalories+item.itemCalories);
-		this.setState({sum : totalCalories});
+	handleSum=()=>{
+		console.log("sum")
+		var sumProps = prop => (sum, obj) => sum += obj[prop];
+		var calories = this.state.dailyIntake.reduce( sumProps('itemCalories'));
+		console.log(calories)
+		this.setState({sum : calories});
 	}
 
 	render() {
@@ -46,14 +55,14 @@ class ResultTable extends React.Component {
 							<TableCell align="right">{row.quantity}</TableCell>
 							<TableCell align="right">{row.unit}</TableCell>
 							<TableCell align="right">{row.itemCalories}</TableCell>
-							<TableCell align="right"><button class="waves-effect waves-teal btn-flat" onClick={() => this.handleDelete(row.item)}><i class="material-icons">delete_outline</i></button></TableCell>
+							<TableCell align="right"><button className="waves-effect waves-teal btn-flat" onClick={() => this.handleDelete(row.item)}><i className="material-icons">delete_outline</i></button></TableCell>
 						</TableRow>
 					))}
 						<TableRow>
 							<TableCell><b>Total</b></TableCell>
 							<TableCell>  </TableCell>
 							<TableCell>   </TableCell>
-							<TableCell><b>{Math.round(this.props.sum)}</b></TableCell>
+							<TableCell><b>{this.handleSum}</b></TableCell>
 						</TableRow>
 				</TableBody>
 			</Table>

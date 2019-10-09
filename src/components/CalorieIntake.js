@@ -19,7 +19,7 @@ function renderSuggestion(suggestion, {query}) {
 	
 	return (
 		<span className='suggestion-content'>
-			<img src={suggestion.photo.thumb} className='suggestion-image'/>
+			<img src={suggestion.photo.thumb} className='suggestion-image' alt="no"/>
 			{parts.map((part, index) => {
 				const className = part.highlight ? 'react-autosuggest__suggestion-match' : null;
 				
@@ -61,7 +61,6 @@ class CalorieIntake extends Component {
 					'x-app-key': 'b0a1785f6d0c3cf84923d5795cda3160'
 				}
 			}).then(response => (response.json())).then(data => {
-				console.log(data);
 				this.setState({foodItems: data.common});
 			});
 		}
