@@ -50,6 +50,13 @@ class CalorieIntake extends Component {
 	handleChange = (event, {newValue}) => {
 		this.setState({item: newValue})
 	}
+
+    setStateToData= (data) =>{
+		this.setState(state => ({
+			...state,
+			dailyIntake: data,
+		}))
+	}
 	
 	onSuggestionsFetchRequested = () => {
 		if (this.state.item.length > 2) {
@@ -130,7 +137,7 @@ class CalorieIntake extends Component {
 					<div className="col-2"></div>
 					<div className="col-8">
 						{this.state.dailyIntake.length > 0 &&
-						<ResultTable dailyIntake={this.state.dailyIntake} quantity={this.state.quantity} unit={this.state.unit} sum ={this.state.totalCalories}/>
+						<ResultTable dailyIntake={this.state.dailyIntake} quantity={this.state.quantity} unit={this.state.unit} setStateToData={this.setStateToData}/>
 						}
 					</div>
 					<div className="col-2"></div>

@@ -7,32 +7,35 @@ import TableRow from '@material-ui/core/TableRow';
 
 class ResultTable extends React.Component {
 
-	constructor(props){
-		super(props);
-		this.state={
-			dailyIntake: [],
-			sum: 0,
-		}
+
+    state={
+        dailyIntake: this.props.dailyIntake,
+        sum: 0,
+    }
+
+    componentDidMount(){
+    	this.handleSum();
 	}
 
-	static getDerivedStateFromProps(props, state) {
-		return {
-			...state,
-			dailyIntake: props.dailyIntake,
-		}
+    componentWillReceiveProps(nextProps){
+		this.handleSum();
 	}
 
 	handleDelete = (itemValue) => {
-		const items = this.state.dailyIntake.filter(val => val.item !== itemValue);
-		this.setState({ dailyIntake: items });
+		console.log(itemValue)
+		const items = this.state.dailyIntake.filter(val => {console.log(val.item); return val.item !== itemValue; });
+		this.setState({ dailyIntake: items }, () => this.handleSum());
+		this.props.setStateToData(items);
 	}
 
 	handleSum=()=>{
 		console.log("sum")
-		var sumProps = prop => (sum, obj) => sum += obj[prop];
-		var calories = this.state.dailyIntake.reduce( sumProps('itemCalories'));
-		console.log(calories)
-		this.setState({sum : calories});
+		let sum =0;
+		for(var i=0; i< this.state.dailyIntake.length; i++){
+			sum += this.state.dailyIntake[i].itemCalories;
+		}
+		console.log(sum);
+		this.setState({sum: sum});
 	}
 
 	render() {
@@ -62,7 +65,7 @@ class ResultTable extends React.Component {
 							<TableCell><b>Total</b></TableCell>
 							<TableCell>  </TableCell>
 							<TableCell>   </TableCell>
-							<TableCell><b>{this.handleSum}</b></TableCell>
+							<TableCell> <b>{this.state.sum}</b>  </TableCell>
 						</TableRow>
 				</TableBody>
 			</Table>
