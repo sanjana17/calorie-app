@@ -1,0 +1,7 @@
+{
+  "name": "Calorie App",
+  "image": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/calories-1522925243.jpg?resize=480:*",
+  "type": ["Javascript", "react"],
+  "description": "This website designed to calculate the current intake of calories of a person and track it",
+  "projectLink": ""
+}
