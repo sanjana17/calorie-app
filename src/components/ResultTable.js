@@ -7,7 +7,6 @@ import TableRow from '@material-ui/core/TableRow';
 
 class ResultTable extends React.Component {
 
-
     state={
         dailyIntake: this.props.dailyIntake,
         sum: 0,
@@ -37,38 +36,53 @@ class ResultTable extends React.Component {
 		console.log(sum);
 		this.setState({sum: sum});
 	}
-
+	handleDeleteAll = () => {
+		this.setState({dailyIntake:[], sum:0});
+	}
 	render() {
 		return (
-			<Table>
-				<TableHead>
-					<TableRow>
-						<TableCell>Item</TableCell>
-						<TableCell align="right">Quantity</TableCell>
-						<TableCell align="right">Unit</TableCell>
-						<TableCell align="right">Calories</TableCell>
-					</TableRow>
-				</TableHead>
-				<TableBody>
-					{this.state.dailyIntake.map(row => (
-						<TableRow key={row.item}>
-							<TableCell component="th" scope="row">
-								{row.item}
+			<div>
+				{this.state.dailyIntake.length > 0 &&
+				<Table>
+					<TableHead>
+						<TableRow>
+							<TableCell>Item</TableCell>
+							<TableCell align="right">Quantity</TableCell>
+							<TableCell align="right">Unit</TableCell>
+							<TableCell align="right">Calories</TableCell>
+							<TableCell align="right">
+								<button className="waves-effect waves-teal btn-flat" onClick={this.handleDeleteAll}><i
+									className="material-icons">delete_outline</i> All
+								</button>
 							</TableCell>
-							<TableCell align="right">{row.quantity}</TableCell>
-							<TableCell align="right">{row.unit}</TableCell>
-							<TableCell align="right">{row.itemCalories}</TableCell>
-							<TableCell align="right"><button className="waves-effect waves-teal btn-flat" onClick={() => this.handleDelete(row.item)}><i className="material-icons">delete_outline</i></button></TableCell>
 						</TableRow>
-					))}
+					</TableHead>
+					<TableBody>
+						{this.state.dailyIntake.map(row => (
+							<TableRow key={row.item}>
+								<TableCell component="th" scope="row">
+									{row.item}
+								</TableCell>
+								<TableCell align="right">{row.quantity}</TableCell>
+								<TableCell align="right">{row.unit}</TableCell>
+								<TableCell align="right">{row.itemCalories}</TableCell>
+								<TableCell align="right">
+									<button className="waves-effect waves-teal btn-flat"
+											onClick={() => this.handleDelete(row.item)}><i
+										className="material-icons">delete_outline</i></button>
+								</TableCell>
+							</TableRow>
+						))}
 						<TableRow>
 							<TableCell><b>Total</b></TableCell>
-							<TableCell>  </TableCell>
-							<TableCell>   </TableCell>
-							<TableCell> <b>{this.state.sum}</b>  </TableCell>
+							<TableCell> </TableCell>
+							<TableCell> </TableCell>
+							<TableCell> <b>{this.state.sum}</b> </TableCell>
 						</TableRow>
-				</TableBody>
-			</Table>
+					</TableBody>
+				</Table>
+				}
+			</div>
 		)
 	}
 }

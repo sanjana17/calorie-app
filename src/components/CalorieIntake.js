@@ -38,12 +38,10 @@ class CalorieIntake extends Component {
 		super(props);
 		this.state = {
 			item: '',
-			itemCalories: '',
 			dailyIntake: [],
 			foodItems: [],
 			quantity: '',
 			unit: '',
-			totalCalories:0,
 		}
 	}
 	
@@ -57,7 +55,7 @@ class CalorieIntake extends Component {
 			dailyIntake: data,
 		}))
 	}
-	
+
 	onSuggestionsFetchRequested = () => {
 		if (this.state.item.length > 2) {
 			var url = "https://trackapi.nutritionix.com/v2/search/instant?query=" + this.state.item + "&self=true&branded=true&common=true&common_general=true&common_grocery=true&common_restaurant=true&detailed=false&claims=false";
@@ -83,13 +81,34 @@ class CalorieIntake extends Component {
 		var itemObject = {item: this.state.item, itemCalories: this.state.itemCalories, quantity: this.state.quantity, unit: this.state.unit}
 		var dailyIntake = this.state.dailyIntake;
 		dailyIntake.push(itemObject);
-		this.setState({dailyIntake: dailyIntake})
+		this.setState({dailyIntake: dailyIntake, item: '', unit: '', quantity: ''})
 	}
 	
 	handleAdd = (event) => {
-		let url = "https://api.nutritionix.com/v1_1/search/" + this.state.item + "?results=0:10&fields=item_name,brand_name,item_id,nf_calories&appId=b8c699e1&appKey=b0a1785f6d0c3cf84923d5795cda3160";
-		fetch(url).then(res => res.json()).then(data => this.setState({itemCalories: data.hits[0].fields.nf_calories, totalCalories: this.state.totalCalories+data.hits[0].fields.nf_calories}, () => this.addValuesDailyIntake()));
-		
+		let url = "https://trackapi.nutritionix.com/v2/natural/nutrients"
+		fetch(url,{
+			method: 'POST',
+			headers: {
+				'x-app-id': 'b8c699e1',
+				'x-app-key': 'b0a1785f6d0c3cf84923d5795cda3160',
+				'x-remote-user-id': 'b8c699e1',
+				'accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({query:this.state.item})
+		}).then(response => (response.json())).then(data => {
+
+			console.log(data)
+			this.setState({itemCalories: data.foods[0].nf_calories, totalCalories: this.state.totalCalories+data.foods[0].nf_calories}, () => this.addValuesDailyIntake())
+
+		});
+		// let url = "https://api.nutritionix.com/v1_1/search/" + this.state.item + "?results=0:10&fields=item_name,brand_name,item_id,nf_calories&appId=b8c699e1&appKey=b0a1785f6d0c3cf84923d5795cda3160";
+		// fetch(url).then(res => res.json()).then(data => {
+		// 		var resultObj = data.hits.filter(hit => hit.fields.item_name.includes(this.state.unit));
+		// 		console.log(resultObj)
+		// 		//this.setState({itemCalories: resultObj.fields.nf_calories, totalCalories: this.state.totalCalories+data.hits[0].fields.nf_calories}, () => this.addValuesDailyIntake())
+		// 	});
+
 	}
 	
 	// input value for every given suggestion.
@@ -136,9 +155,7 @@ class CalorieIntake extends Component {
 					</div>
 					<div className="col-2"></div>
 					<div className="col-8">
-						{this.state.dailyIntake.length > 0 &&
 						<ResultTable dailyIntake={this.state.dailyIntake} quantity={this.state.quantity} unit={this.state.unit} setStateToData={this.setStateToData}/>
-						}
 					</div>
 					<div className="col-2"></div>
 				</div>
